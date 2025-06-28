@@ -1,0 +1,14 @@
+/* Global centering styles */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure the app container takes full width and height */
+.App {
+  width: 100%;
+  min-height: 100vh;
+}
