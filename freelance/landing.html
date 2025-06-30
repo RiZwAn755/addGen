@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kreavo AI - AI Ad Generation Platform</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-blue: #667eea;
+      --primary-purple: #8b5cf6;
+      --primary-gold: #ffd700;
+      --primary-gold-light: #ffed4e;
+      --secondary-dark-blue: #1a1a2e;
+      --secondary-darker-blue: #16213e;
+      --secondary-light-blue: #2a2a3e;
+      --secondary-lighter-blue: #26314e;
+      --bg-black: #0a0a0a;
+      --bg-darker-black: #050505;
+      --bg-dark-black: #0f0f0f;
+      --bg-container: rgba(20, 20, 20, 0.8);
+      --bg-form: rgba(15, 15, 15, 0.9);
+      --bg-input: rgba(30, 30, 30, 0.8);
+      --bg-input-focus: rgba(40, 40, 40, 0.9);
+      --bg-feature: rgba(255, 255, 255, 0.05);
+      --bg-feature-hover: rgba(255, 255, 255, 0.08);
+      --bg-feature-icon: rgba(255, 255, 255, 0.1);
+      --text-white: #ffffff;
+      --text-white-80: rgba(255, 255, 255, 0.8);
+      --text-white-60: rgba(255, 255, 255, 0.6);
+      --text-white-50: rgba(255, 255, 255, 0.5);
+      --text-white-40: rgba(255, 255, 255, 0.4);
+      --border-white-20: rgba(255, 255, 255, 0.2);
+      --border-white-15: rgba(255, 255, 255, 0.15);
+      --border-white-10: rgba(255, 255, 255, 0.1);
+      --border-white-5: rgba(255, 255, 255, 0.05);
+      --error-red: #ef4444;
+      --error-red-light: rgba(239, 68, 68, 0.1);
+      --shadow-black: rgba(0, 0, 0, 0.5);
+      --shadow-black-30: rgba(0, 0, 0, 0.3);
+      --gradient-radial-1: rgba(60, 60, 100, 0.2);
+      --gradient-radial-2: rgba(100, 60, 100, 0.2);
+      --gradient-radial-3: rgba(60, 100, 120, 0.1);
+      --gradient-white-10: rgba(255, 255, 255, 0.1);
+      --google-blue: rgba(66, 133, 244, 0.2);
+      --google-blue-hover: rgba(66, 133, 244, 0.3);
+      --google-blue-bg: rgba(66, 133, 244, 0.05);
+      --kreavo-accent: #ffd700;
+      --kreavo-success: #00c48c;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--bg-black) 0%, var(--bg-dark-black) 50%, var(--bg-darker-black) 100%);
+      color: var(--text-white);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .navbar {
+      background: var(--secondary-dark-blue);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .navbar-brand {
+      color: var(--primary-blue) !important;
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
+    .nav-link {
+      color: var(--text-white-80) !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      color: var(--primary-gold) !important;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, var(--secondary-dark-blue) 60%, var(--primary-purple) 100%);
+      color: var(--text-white);
+      padding: 80px 0 60px 0;
+      text-align: center;
+    }
+    .hero-section h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+    .hero-section p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: var(--text-white-80);
+    }
+    .btn-kreavo {
+      background: var(--kreavo-accent);
+      color: var(--secondary-dark-blue);
+      font-weight: 600;
+      border-radius: 30px;
+      padding: 0.75rem 2rem;
+      transition: background 0.2s, color 0.2s;
+      border: none;
+    }
+    .btn-kreavo:hover {
+      background: var(--primary-blue);
+      color: var(--text-white);
+    }
+    .feature-card {
+      background: var(--bg-container);
+      border: 1px solid var(--border-white-10);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px var(--shadow-black-30);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: var(--text-white-80);
+    }
+    .feature-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 24px var(--shadow-black);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+    .industry-icon {
+      font-size: 2rem;
+      color: var(--kreavo-accent);
+      margin-bottom: 0.5rem;
+    }
+    .download-section {
+      background: var(--bg-form);
+      color: var(--text-white);
+      padding: 50px 0;
+      text-align: center;
+      border-radius: 18px;
+      margin: 40px 0;
+      box-shadow: 0 2px 12px var(--shadow-black-30);
+    }
+    .form-control, .form-control:focus {
+      background: var(--bg-input);
+      color: var(--text-white);
+      border: 1px solid var(--border-white-10);
+    }
+    .form-control::placeholder {
+      color: var(--text-white-50);
+    }
+    .testimonial {
+      background: var(--bg-container);
+      border-left: 5px solid var(--primary-blue);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      color: var(--text-white-80);
+    }
+    .footer {
+      background: var(--secondary-dark-blue);
+      color: var(--text-white-60);
+      padding: 30px 0 10px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .footer a {
+      color: var(--kreavo-accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: var(--primary-gold-light);
+    }
+    .bg-white {
+      background: var(--bg-container) !important;
+      color: var(--text-white-80) !important;
+    }
+    .text-muted {
+      color: var(--text-white-50) !important;
+    }
+    .row.text-center.mb-4 h2 {
+      color: var(--primary-gold);
+    }
+    .row.text-center.mb-4 p {
+      color: var(--text-white-60);
+    }
+    .row.text-center.mt-4 h3 {
+      font-weight: 700;
+    }
+    .row.text-center.mt-4 p {
+      color: var(--text-white-50);
+    }
+    a {
+      color: var(--primary-blue);
+    }
+    a:hover {
+      color: var(--primary-gold);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kreavo AI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#solutions">Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>AI Ad Generation Made Effortless with Kreavo AI</h1>
+      <p>Supercharge your marketing with AI-generated, high-converting ads for every platform. Create, customize, and launch campaigns in minutes.</p>
+      <a href="#download" class="btn btn-kreavo btn-lg">Get Started Free</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5">
+    <div class="container">
+      <div class="row text-center mb-4">
+        <h2>Why Choose Kreavo AI?</h2>
+        <p class="text-muted">The ultimate platform for AI-powered ad creation and campaign management</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h5>AI Ad Copywriting</h5>
+            <p>Generate compelling ad copy tailored to your brand and audience in seconds.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h5>Creative Image Generation</h5>
+            <p>Produce stunning visuals and banners for your ads using advanced AI models.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h5>Performance Analytics</h5>
+            <p>Track, analyze, and optimize your ad campaigns with real-time insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Solutions Section -->
+  <section id="solutions" class="py-5 bg-white">
+    <div class="container">
+      <div class="row text-center mb-4">
+        <h2>Industry Solutions</h2>
+        <p class="text-muted">AI ad generation for every business type</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-6 col-md-2">
+          <div class="industry-icon">🛒</div>
+          <div>E-commerce</div>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="industry-icon">🏥</div>
+          <div>Healthcare</div>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="industry-icon">🍽️</div>
+          <div>Restaurants</div>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="industry-icon">🏢</div>
+          <div>Real Estate</div>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="industry-icon">🎓</div>
+          <div>Education</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download/Signup Section -->
+  <section id="download" class="download-section container">
+    <h2>Start with Kreavo AI Today</h2>
+    <p>Enter your email to get started or receive the download link</p>
+    <form class="row justify-content-center g-2">
+      <div class="col-md-4 col-8">
+        <input type="email" class="form-control form-control-lg" placeholder="Enter your email" required>
+      </div>
+      <div class="col-md-2 col-4">
+        <button type="submit" class="btn btn-kreavo btn-lg w-100">Send Link</button>
+      </div>
+    </form>
+    <div class="mt-3">
+      <small>Or <a href="#" style="color: var(--kreavo-accent);">download for Windows</a> | <a href="#" style="color: var(--kreavo-accent);">download for Android</a></small>
+    </div>
+    <div class="mt-4 d-flex justify-content-center gap-3">
+      <a href="#" target="_blank" rel="noopener" style="display:inline-block;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height:48px;">
+      </a>
+      <a href="#" target="_blank" rel="noopener" style="display:inline-block;">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style="height:48px;">
+      </a>
+    </div>
+  </section>
+
+  <!-- Testimonials/Stats Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row text-center mb-4">
+        <h2>Trusted by Marketers</h2>
+        <p class="text-muted">Join thousands of businesses growing with Kreavo AI</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="testimonial">
+            <strong>"Kreavo AI boosted our ad ROI by 40%!"</strong><br>
+            <span class="text-muted">- Priya, E-commerce Manager</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial">
+            <strong>"Ad creation is now 10x faster and more creative."</strong><br>
+            <span class="text-muted">- Amit, Agency Owner</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial">
+            <strong>"The AI suggestions are spot on for our audience."</strong><br>
+            <span class="text-muted">- Ritu, Marketing Lead</span>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center mt-4">
+        <div class="col">
+          <h3 style="color: var(--kreavo-success);">10,000+</h3>
+          <p class="text-muted">Happy Customers</p>
+        </div>
+        <div class="col">
+          <h3 style="color: var(--kreavo-accent);">4.8/5</h3>
+          <p class="text-muted">Average Rating</p>
+        </div>
+        <div class="col">
+          <h3 style="color: var(--primary-blue);">24/7</h3>
+          <p class="text-muted">Support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="mb-2">
+        <a href="#about">About Us</a> | <a href="#">Contact</a> | <a href="#">Terms</a>
+      </div>
+      <div>
+        &copy; 2024 Kreavo AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
